@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Screening{% endblock %}
+
+{% block body %}
+    <h1>Screening</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ screening.id }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td>{{ screening.time ? screening.time|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Vf</th>
+                <td>{{ screening.vf ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Subtitled</th>
+                <td>{{ screening.subtitled ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Movie</th>
+                <td>{{ screening.movie.title }}</td>
+            </tr>
+            <tr>
+                <th>Room</th>
+                <td>{{ screening.room.number }}</td>
+            </tr>
+            {# <tr>
+                <th>CreatedAt</th>
+                <td>{{ screening.createdAt ? screening.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ screening.updatedAt ? screening.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr> #}
+        </tbody>
+    </table>
+
+    <a href="{{ path('screening_index') }}">back to list</a>
+
+    <a href="{{ path('screening_edit', {'id': screening.id}) }}">edit</a>
+
+    {{ include('screening/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les séances - CineMNS{% endblock %}
+
+{% block body %}
+    	<div id="main">
+	    	<header>
+	    		<h1>CinéMNS - Le cinéma référence de Metz</h1>
+	    	</header>
+
+            {% include '_navigation.html.twig' %}
+
+	        <h2><span>LES SÉANCES</span></h2>
+
+            {% set aumoins1 = false %}
+
+            {% for movie in movies|filter(movie => movie.screenings|length > 0) %}
+			
+	        <article>
+	            <div class="info">
+	                <h3><a href="{{ path('film', {'id': movie.id}) }}">{{ movie.title }}</a></h3>
+	                <p>Genre : <span class="genre">{{ movie.genre.name }}</span></p>
+	                <p>Durée : <span class="duree">{{ movie.duration }} minutes</span></p>
+	                <p>Avec : <span class="act">{{ movie.actors }}</span></p>
+	                <br>
+	                <p>Synopsis : <span class="syno">{{ movie.synopsis }}</span></p>
+	            </div>
+	            <img src="/uploads/posters/{{ movie.posterfilename }}" />
+
+
+		        <div class="seances">
+		        	<div class="jours">
+                    {% for i in 0..10 %}
+		        		<div class="{{'tabjour jb'~i~' '}}{% if i == 0 %}active{% endif %}">
+		        			<a href="{{'javascript:swtab(\'jb'~i~'\', \'j'~i~'\');'}}"><div>{{"now"|date_modify('+'~i~'days')|format_datetime(locale='fr', pattern='eee')|capitalize}}</div><div>{{"now"|date_modify('+'~i~'days')|date('d')}}</div></a>
+		        		</div>
+                    {% endfor %}
+		        	</div>
+		        	<div class="www">
+			        	<div class="cc">
+                            {% for i in 0..10 %}
+                                <div class="seance j{{ i }}" {% if i > 0 %}style="display: none;"{% endif %}>
+                                {% set hasScreenings = false %}
+                                {% for screening in movie.screenings|filter(screening => screening.time|date('d-m-Y') == "now"|date_modify('+'~i~'days')|date('d-m-Y')) %}
+                                    <div class="sse"><div class="ssj"><div class="heure">{{ screening.time|date('H:i') }}</div><div class="vf">{% if screening.vf %}VF{% else %}VO{% endif %}{% if screening.subtitled %}ST{% endif %}</div></div>{% if screening.room.wheelchairAccessible %}<div class="accessible"><img src="/uploads/accessible.png"></div>{% endif %}</div>
+                                    {% set hasScreenings = true %}
+									{% set aumoins1 = true %}
+                                {% endfor %}
+                                {% if hasScreenings == false %}
+                                <div class="padse">Pas de séance ce jour-là.</div>
+                                {% endif %}
+                                </div>
+                            {% endfor %}
+
+			        	</div>
+			        </div>
+		        </div>
+	        </article>
+            {% endfor %}
+
+			{% if aumoins1 == false %}
+			<p>Aucune séance pour l'instant !</p>
+			{% endif %}
+
+	    </div>
+{% endblock %}

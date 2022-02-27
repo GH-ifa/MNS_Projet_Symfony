@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Film - CineMNS{% endblock %}
+
+{% block body %}
+    	<div id="main">
+	    	<header>
+	    		<h1>CinéMNS - Le cinéma référence de Metz</h1>
+	    	</header>
+
+            {% include '_navigation.html.twig' %}
+
+            <h2><span>LES FILMS A L'AFFICHE</span></h2>
+            {% if movies|filter(movie => movie.status == 'currently')|length == 0 %}
+            <p>Aucun film à l'affiche actuellement !</p>
+            {% else %}
+            <div class="filmlist">
+            
+
+            {% for movie in movies|filter(movie => movie.status == 'currently') %}
+                <div class="film">
+                    <a href="{{ path('film', {'id': movie.id}) }}">
+                        <img src="/uploads/posters/{{ movie.posterfilename }}" />
+                        <h3>{{ movie.title }}</h3>
+                        <span class="genre">{{ movie.genre.name }}</span> <span class="duree">({{ movie.duration }} minutes)</span>
+                    </a>
+
+                    {% if movie.screenings|filter(screening => screening.time >= "now")|length == 0 %}
+                    <p>Pas de séance programmée pour l'instant.</p>
+                    {% else %}
+                    <p>Prochaine séance :</p>
+                    {# <p>Le {{ movie.screenings|filter(screening => screening.time >= "now")|sort((a, b) => a.time <=> b.time)|first|format_datetime(locale='fr', pattern='dd LLLL à HH:mm') }}</p> #}
+                    <p>Le {{ movie.screenings|filter(screening => screening.time >= "now")|sort((a, b) => a.time <=> b.time)|first.time|format_datetime(locale='fr', pattern='dd LLLL à HH:mm') }}</p>
+
+                    {% endif %}
+
+
+
+
+                </div>
+            {% endfor %}
+
+            </div>
+            {% endif %}
+
+            <h2><span>LES PROCHAINES SORTIES</span></h2>
+            {% if movies|filter(movie => movie.status == 'coming_soon')|length == 0 %}
+            <p>Aucune prochaine sortie !</p>
+            {% else %}
+            <div class="filmlist">
+            {% for movie in movies|filter(movie => movie.status == 'coming_soon') %}
+                <div class="film">
+                    <a href="{{ path('film', {'id': movie.id}) }}">
+                        <img src="/uploads/posters/{{ movie.posterfilename }}" />
+                        <h3>{{ movie.title }}</h3>
+                        <span class="genre">{{ movie.genre.name }}</span> <span class="duree">({{ movie.duration }} minutes)</span>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+            {% endif %}
+
+
+	    </div>
+{% endblock %}

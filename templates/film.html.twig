@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Scéances du film {{ movie.title }} - CineMNS{% endblock %}
+
+{% block body %}
+    	<div id="main">
+	    	<header>
+	    		<h1>CinéMNS - Le cinéma référence de Metz</h1>
+	    	</header>
+
+            {% include '_navigation.html.twig' %}
+
+            <h2><span>FILM</span></h2>
+            
+	        <article style="border: none">
+	            <div class="info">
+	                <h3>{{ movie.title }}</h3>
+	                <p>Genre : <span class="genre">{{ movie.genre.name }}</span></p>
+	                <p>Durée : <span class="duree">{{ movie.duration }} minutes</span></p>
+	                <p>Avec : <span class="act">{{ movie.actors }}</span></p>
+	                <br>
+	                <p>Synopsis : <span class="syno">{{ movie.synopsis }}</span></p>
+	            </div>
+	            <img src="/uploads/posters/{{ movie.posterfilename }}" />
+			</article>
+
+			{% if movie.screenings|filter(screening => screening.time >= "now")|length == 0 %}
+			<div class="padse">Pas de séance programmée pour l'instant.</div>
+			{% else %}
+			<h4>Les prochaines séances</h4>
+			{% for screening in movie.screenings|filter(screening => screening.time >= "now")|sort((a, b) => a.time <=> b.time) %}
+				<div class="sse"><div class="ssj"><div class="heure">{{ screening.time|format_datetime(locale='fr', pattern='dd LLLL à HH:mm') }} </div><div class="vf">{% if screening.vf %}VF{% else %}VO{% endif %}{% if screening.subtitled %}ST{% endif %}</div></div>{% if screening.room.wheelchairAccessible %}<div class="accessible"><img src="/uploads/accessible.png"></div>{% endif %}</div>
+			{% endfor %}
+			{% endif %}
+
+
+
+	    </div>
+{% endblock %}
