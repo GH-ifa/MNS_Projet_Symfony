@@ -14,7 +14,7 @@
 
             {% set aumoins1 = false %}
 
-            {% for movie in movies|filter(movie => movie.screenings|length > 0) %}
+            {% for movie in movies|filter(movie => movie.screenings|length > 0)|sort((a, b) => a.screenings|length < b.screenings|length) %}
 			
 	        <article>
 	            <div class="info">

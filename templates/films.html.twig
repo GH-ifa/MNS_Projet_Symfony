@@ -17,7 +17,7 @@
             <div class="filmlist">
             
 
-            {% for movie in movies|filter(movie => movie.status == 'currently') %}
+            {% for movie in movies|filter(movie => movie.status == 'currently')|sort((a, b) => a.screenings|length < b.screenings|length) %}
                 <div class="film">
                     <a href="{{ path('film', {'id': movie.id}) }}">
                         <img src="/uploads/posters/{{ movie.posterfilename }}" />

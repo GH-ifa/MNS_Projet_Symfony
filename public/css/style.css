@@ -1,0 +1,222 @@
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+
+            #main {
+            	max-width: 1000px;
+            	margin: auto;
+            }
+
+            nav ul {
+			    background: #555;
+			    color: #fff;
+			    font-size: 14px;
+			    text-align: center;
+			    padding: 0;
+			    margin: 0;
+			    left: 0;
+			    right: 0;
+            }
+
+            nav ul li
+            {
+            	padding: 0;
+			    margin: 0;
+			    list-style: none;
+			    position: relative;
+			    display: inline-block;
+            }
+
+            nav ul li a
+            {
+            	display: block;
+			    padding: 0 30px;
+			    height: 60px;
+			    line-height: 60px;
+                font-size: 50px;
+			    color: #fff;
+			    text-decoration: none;
+            }
+            nav ul li a:hover {
+            	background:red;
+            }
+
+            h1 {
+
+            }
+
+            h2 {
+            	border-bottom: solid 1px black;
+            	width: 98%;
+				margin:auto;
+				margin-top: 10px;
+            }
+            h2 span {
+            	margin-left: 2%;
+            }
+
+
+            article {
+                display: grid;
+                width: 95%;
+                grid-template-columns: fit-content(160px) 1fr;
+                grid-template-rows: auto;
+                margin: 30px auto;
+                padding-bottom: 20px;
+            	border-bottom: solid 1px black;
+            }
+            article img {
+                grid-column-start: 1;
+                grid-column-end: 2;
+                grid-row-start: 1;
+                grid-row-end: 2;
+                max-width: 160px;
+            }
+
+
+            .info {
+                grid-column-start: 2;
+                grid-column-end: 2;
+                grid-row-start: 1;
+                grid-row-end: 2;
+            }
+
+            article .info {
+            	margin: 0px 20px;
+            }
+
+            .info h3 {
+            	color: red;
+            	font-size: 40px;
+            }
+
+            .info .genre, .info .duree, .info .act {
+            	font-weight: bold;
+            }
+
+
+            .seances {
+            	display: block;
+                grid-column-start: 1;
+                grid-column-end: 3;
+                grid-row-start: 2;
+                margin-top: 10px;
+            }
+
+            .jours {
+            	display: flex;
+
+            }
+
+            .tabjour {
+            	width: 6%;
+            	text-align: center;
+            	background-color: #CCC;
+            }
+
+            .tabjour a {
+
+            	display: block;
+            	color: #333;
+            	font-weight: bold;
+            	text-decoration: none;
+            	font-size: 18px;
+            	padding: 5px 0px;
+            	border: solid 1px #AAA;
+            	border-bottom: none;
+            }
+
+            .active a{
+            	background-color:white;
+            	border-top: solid 3px red;
+            	color: black;
+            }
+
+            .sse {
+            	border: solid 1px black;
+            	min-width: 80px;
+            	border-radius: 10px;
+            	text-align: center;
+            	margin: 10px 10px 5px 0px;
+            	box-shadow: 0px 0px 5px 0px #AAA;
+            	font-weight:bold;
+            	display: inline-flex;
+            	flex-direction: row;
+            	flex-wrap: nowrap;
+            	justify-content: space-around;
+            	justify-content: space-evenly;
+            }
+
+            .padse {
+            	min-height: 60px;
+            	padding: 20px 0px 0px 20px;
+            	font-size: 20px;
+            	font-weight: bold;
+            }
+
+            .ssj {
+            	min-width: 80px;
+            }
+            .www {
+            	min-height: 60px;
+            }
+
+            .heure {
+
+            }
+
+            .vf {
+
+            }
+
+            .accessible {
+				min-width: 30px;
+				display: flex;
+            }
+
+            .accessible img {
+            	width: 20px;
+            	margin: auto;
+            }
+
+            .filmlist {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: left;
+            }
+
+            .film {
+                text-align: center;
+                max-width: 300px;
+
+                margin: 15px;
+
+            }
+            .film img {
+                max-width: 300px;
+                max-height: 430px;
+                margin: 0px auto;
+            }
+
+            .film h3 {
+                color: red;
+                font-size: 40px;
+
+            }
+            .film .duree, .film .genre {
+                font-weight: bold;
+            }
+            .film a {
+                display: block;
+                color: black;
+                text-decoration: none;
+            }
+
+            .info a {
+                color: red;
+                text-decoration: none;
+            }

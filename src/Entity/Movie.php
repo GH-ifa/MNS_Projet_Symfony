@@ -25,9 +25,7 @@ class Movie
      */
     private $title;
 
-    // /**
-    //  * @ORM\Column(type="string", length=255, nullable=true)
-    //  */
+
     /**
      * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="movies")
      * @ORM\JoinColumn(nullable=false)
@@ -35,7 +33,7 @@ class Movie
     private $genre;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $synopsis;
 
@@ -50,7 +48,7 @@ class Movie
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $duration;
 
